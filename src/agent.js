@@ -29,11 +29,11 @@ const requests = {
 
 const darklangRequests = {
     del: url =>
-      superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
+      superagent.del(`${DARK_LANG_ROOT}${url}`).use(tokenPlugin).then(responseBody),
     get: url =>
-      superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
+      superagent.get(`${DARK_LANG_ROOT}${url}`).use(tokenPlugin).then(responseBody),
     put: (url, body) =>
-      superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
+      superagent.put(`${DARK_LANG_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
     post: (url, body) =>
       superagent.post(`${DARK_LANG_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
 };
@@ -57,7 +57,7 @@ const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
 const Articles = {
   all: page =>
-    requests.get(`/articles?${limit(10, page)}`),
+    darklangRequests.get(`/articles?${limit(10, page)}`),
   byAuthor: (author, page) =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
