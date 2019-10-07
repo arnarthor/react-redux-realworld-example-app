@@ -50,7 +50,7 @@ const Auth = {
 };
 
 const Tags = {
-  getAll: () => requests.get('/tags')
+  getAll: () => darklangRequests.get('/tags')
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
@@ -61,7 +61,7 @@ const Articles = {
   byAuthor: (author, page) =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
-    requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
+    darklangRequests.get(`/articles/tag/${encode(tag)}?${limit(10, page)}`),
   del: slug =>
     requests.del(`/articles/${slug}`),
   favorite: slug =>
